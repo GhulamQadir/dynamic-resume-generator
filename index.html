@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- <div id="resumeDiv">
+        <h1>Build your resume</h1>
+        <br />
+        <br />
+        <input type="text" placeholder="Your Name" id="name" /><br />
+        <input type="email" placeholder="Your email" id="email" /><br />
+        <input type="number" placeholder="Your Phone No" id="phoneNum" /><br />
+        <button onclick="createResume()">Create Resume</button>
+    </div> -->
+    <div id="resumeDiv">
+        <div id="createResumeFormDiv">
+            <div id="loader"></div>
+            <div id="alert">
+                <span id="closebtn" onclick="closeErrorAlert()">&times;</span>
+                <span id="error_message"></span>
+            </div>
+
+            <!-- Create Account Heading -->
+            <p id="createResumeHeading">Create Resume</p>
+
+
+            <!-- Sign Up FORM -->
+            <form method="post" onsubmit="createResume(event)">
+                <div class="inputDiv">
+                    <input id="name" type="name" placeholder="Your Name">
+                </div>
+                <div class="inputDiv">
+                    <input id="jobTitle" type="text" placeholder="Your job title">
+                </div>
+                <div class="inputDiv">
+                    <input id="email" type="email" placeholder="Your Email">
+                </div>
+                <div class="inputDiv">
+                    <input id="phoneNum" type="number" placeholder="Phone No">
+                </div>
+                <div class="inputDiv">
+                    <textarea id="profileBio" placeholder="Enter profile bio" maxlength="400"></textarea>
+                </div>
+                <div class="inputDiv">
+                    <input id="educationInput" type="text" placeholder="Add Education">
+                    <button class="addBtn" onclick="addEducation()">+</button>
+                    <ul id="educationList"></ul>
+                </div>
+                <div class="inputDiv">
+                    <input id="experienceInput" type="text" placeholder="Add Experience">
+                    <button class="addBtn" onclick="addExperience()">+</button>
+                    <ul id="experienceList"></ul>
+                </div>
+                <div class="inputDiv">
+                    <input id="skillsInput" type="text" placeholder="Add Skills">
+                    <button class="addBtn" onclick="addSkill()">+</button>
+                    <ul id="skillsList"></ul>
+                </div>
+                <div class="inputDiv">
+                    <img id="fileImg" src="" alt="">
+                    <input type="file" id="fileInput" onchange="uploadProfilePic(event)" />
+                </div> <!-- Create Resume Button -->
+
+                <button class="createResumeBtn" onclick="createResume(event)">Create</button>
+            </form>
+        </div>
+
+    </div>
+    <script src="resume-builder.js"></script>
+</body>
+
+</html>

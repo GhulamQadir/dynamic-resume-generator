@@ -1,0 +1,182 @@
+#createResumeFormDiv {
+  margin: auto;
+  width: 40%;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 13px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+  color: black;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 7px 2px 20px 2px !important;
+  position: relative;
+}
+form {
+  width: 100%;
+  text-align: center;
+}
+
+/* Create account heading */
+#createResumeHeading {
+  margin-top: 70px;
+  margin-bottom: 15px;
+  font-size: 30px;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+
+/* input fields styling */
+input,
+textarea {
+  height: 25px;
+  width: 80%;
+  margin-top: 15px;
+  border: 0px;
+  background: none;
+  border: 1px solid rgb(197, 194, 194);
+  color: black;
+  font-size: 16px;
+  padding-left: 6px;
+  border-radius: 5px;
+  display: inline;
+}
+
+textarea {
+  height: 100px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+input:focus {
+  border: 2px solid rgb(165, 164, 164) !important;
+}
+::placeholder {
+  font-weight: 500;
+}
+
+.inputDiv {
+  width: 60%;
+  margin: auto;
+  text-align: start;
+}
+.addBtn {
+  display: inline;
+  background-color: rgb(15, 15, 77);
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  height: 34px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 12%;
+}
+
+.addBtn:hover {
+  opacity: 0.7;
+  transition: 0.1s opacity ease-in-out 0.1s;
+}
+
+.createResumeBtn {
+  margin-top: 20px;
+  border: 1px solid rgb(27, 27, 105);
+  background-color: darkblue;
+  color: white;
+  padding: 5px 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Responsiveness of Create Resume Form Div */
+@media screen and (max-width: 900px) {
+  #createResumeFormDiv {
+    width: 70%;
+  }
+  .inputDiv {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 550px) {
+  #createResumeFormDiv {
+    width: 80%;
+  }
+  .inputDiv {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #createResumeFormDiv {
+    width: 85%;
+  }
+  .inputDiv {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #createResumeFormDiv {
+    width: 90%;
+  }
+}
+/* ends here */
+
+/* Alert box styling */
+#alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  display: none;
+  position: absolute;
+  top: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+
+/* Alert box close button styling */
+#closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#closebtn:hover {
+  color: black;
+}
+
+/* Alert box styling end */
+
+#fileInput {
+  border: none;
+}
+
+#profileDiv {
+  background-color: rgb(235, 235, 229);
+  border-radius: 50px;
+  width: 30%;
+  margin: auto;
+  padding: 35px 20px;
+  font-family: sans-serif;
+}
+#fileImg {
+  display: none;
+  height: 80px;
+  width: 120px;
+  border-radius: 30px;
+}
