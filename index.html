@@ -24,7 +24,6 @@
             <p id="createResumeHeading">Create Resume</p>
 
 
-            <!-- Sign Up FORM -->
             <form method="post" onsubmit="createResume(event)">
                 <div class="inputDiv">
                     <input id="name" type="name" placeholder="Your Name">
@@ -43,25 +42,26 @@
                 </div>
                 <div class="inputDiv">
                     <input id="educationInput" type="text" placeholder="Add Education">
-                    <button class="addBtn" onclick="addEducation()">+</button>
+                    <button class="addBtn" onclick="addEducation(event)">+</button>
                     <ul id="educationList"></ul>
                 </div>
                 <div class="inputDiv">
                     <input id="experienceInput" type="text" placeholder="Add Experience">
-                    <button class="addBtn" onclick="addExperience()">+</button>
+                    <button class="addBtn" onclick="addExperience(event)">+</button>
                     <ul id="experienceList"></ul>
                 </div>
                 <div class="inputDiv">
                     <input id="skillsInput" type="text" placeholder="Add Skills">
-                    <button class="addBtn" onclick="addSkill()">+</button>
+                    <button class="addBtn" onclick="addSkill(event)">+</button>
                     <ul id="skillsList"></ul>
                 </div>
                 <div class="inputDiv">
                     <input id="languageInput" type="text" placeholder="Add Language">
-                    <button class="addBtn" onclick="addLanguage()">+</button>
+                    <button class="addBtn" onclick="addLanguage(event)">+</button>
                     <ul id="languageList"></ul>
                 </div>
                 <div class="inputDiv">
+                    <h3 class="profilePicHeading">Upload Profile Picture</h3>
                     <img id="fileImg" src="" alt="">
                     <input type="file" id="fileInput" onchange="uploadProfilePic()" />
                 </div>
@@ -71,6 +71,51 @@
             </form>
         </div>
 
+    </div>
+
+    <!-- Create Account Heading -->
+    <div id="editResumeDiv">
+        <p id="editResumeHeading">Edit Resume</p>
+        <form method="post" onsubmit="updateResume(event)">
+            <div class="inputDiv">
+                <input id="editNameField" type="name" placeholder="Your Name">
+            </div>
+            <div class="inputDiv">
+                <input id="editJobTitleField" type="text" placeholder="Your job title">
+            </div>
+            <div class="inputDiv">
+                <input id="editEmailField" type="email" placeholder="Your Email">
+            </div>
+            <div class="inputDiv">
+                <input id="editPhoneNumField" type="number" placeholder="Phone No">
+            </div>
+            <div class="inputDiv">
+                <textarea id="editProfileBioField" placeholder="Enter profile bio" maxlength="400"></textarea>
+            </div>
+            <div class="inputDiv">
+                <input id="editEducationInputField" type="text" placeholder="Add Education">
+                <button class="addBtn" onclick="addeditEducation(event)">+</button>
+                <ul id="editEducationList"></ul>
+            </div>
+            <div class="inputDiv">
+                <input id="editExperienceInputField" type="text" placeholder="Add Experience">
+                <button class="addBtn" onclick="addeditExperience(event)">+</button>
+                <ul id="editExperienceList"></ul>
+            </div>
+            <div class="inputDiv">
+                <input id="editSkillsInputField" type="text" placeholder="Add Skills">
+                <button class="addBtn" onclick="addeditSkill(event)">+</button>
+                <ul id="editSkillsList"></ul>
+            </div>
+            <div class="inputDiv">
+                <input id="editLanguageInputField" type="text" placeholder="Add Language">
+                <button class="addBtn" onclick="addeditLanguage(event)">+</button>
+                <ul id="editLanguageList"></ul>
+            </div>
+            <!-- Update Resume Button -->
+
+            <button class="updateResume" onclick="updateResume(event)">Update Resume</button>
+        </form>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"

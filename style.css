@@ -84,7 +84,8 @@ input:focus {
   transition: 0.1s opacity ease-in-out 0.1s;
 }
 
-.createResumeBtn {
+.createResumeBtn,
+.updateResume {
   margin-top: 20px;
   border: 1px solid rgb(27, 27, 105);
   background-color: darkblue;
@@ -94,7 +95,9 @@ input:focus {
   border-radius: 5px;
   cursor: pointer;
 }
-
+.profilePicHeading {
+  line-height: 0px;
+}
 /* Responsiveness of Create Resume Form Div */
 @media screen and (max-width: 900px) {
   #createResumeFormDiv {
@@ -300,10 +303,23 @@ body {
   padding-top: 30px;
   margin: auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 .lowerBtns {
+  margin-top: 30px;
   background-color: navy;
   color: white;
   margin-left: 30px;
+  padding: 5px 10px;
+}
+a {
+  color: white;
+}
+#editResumeDiv {
+  display: none;
+}
+#editResumeHeading {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
 }

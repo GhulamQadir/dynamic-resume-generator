@@ -34,7 +34,8 @@ const closeErrorAlert = () => {
   }, 600);
 };
 
-const addEducation = () => {
+const addEducation = (event) => {
+  event.preventDefault();
   if (education.value.trim().length < 1) {
     education.focus();
   } else {
@@ -43,7 +44,8 @@ const addEducation = () => {
     education.value = "";
   }
 };
-const addSkill = () => {
+const addSkill = (event) => {
+  event.preventDefault();
   if (skill.value.trim().length < 1) {
     skill.focus();
   } else {
@@ -52,7 +54,8 @@ const addSkill = () => {
     skill.value = "";
   }
 };
-const addExperience = () => {
+const addExperience = (event) => {
+  event.preventDefault();
   if (experience.value.trim().length < 1) {
     experience.focus();
   } else {
@@ -61,7 +64,8 @@ const addExperience = () => {
     experience.value = "";
   }
 };
-const addLanguage = () => {
+const addLanguage = (event) => {
+  event.preventDefault();
   if (language.value.trim().length < 1) {
     language.focus();
   } else {
@@ -83,6 +87,83 @@ interface Resume {
   languages: string[];
   profileImg: string;
 }
+
+const htmlContent = (generatedLink) => {
+  let getData = localStorage.getItem("resume");
+  let parsedData = getData ? JSON.parse(getData) : null;
+  let {
+    name,
+    email,
+    phoneNum,
+    jobTitle,
+    profileBio,
+    languages,
+    experience,
+    education,
+    skills,
+  } = parsedData;
+  resumeDiv.innerHTML = `<div id="myResumeDiv">
+  <div class="headerDiv">
+      <div class="leftHandHeader">
+          <div>
+              <p class="name">${name}</p>
+              <p class="jobTitle">${jobTitle}</p>
+          </div>
+          <img class="profileImg" src="${selectedFile}" />
+      </div>
+      <div class="rightHandHeader">
+          <p class="email">Email: ${email}</p>
+          <p class="phoneNo">Phone No: ${phoneNum}</p>
+      </div>
+  </div>
+
+     <div class="mainContentDiv">
+      <div class="leftHandMainDiv">
+          <div class="aboutMeDiv mainDivs">
+              <p class="mainDivHeadings">About Me</p>
+              <p class="aboutMeContent">${profileBio}</p>
+          </div>
+          <div class="educationDiv mainDivs">
+              <p class="mainDivHeadings">Education</p>
+              <ul id="educationList">
+      ${education.map((educationItem) => `<li>${educationItem}</li>`)}
+              </ul>
+          </div>
+          <div class="experienceDiv mainDivs">
+              <p class="mainDivHeadings">Experience</p>
+            
+              <ul id="experienceList">
+                      ${experience.map((expItem) => `<li>${expItem}</li>`)}
+              </ul>
+          </div>
+      </div>
+
+      <div class="rightHandMainDiv">
+          <div class="experienceDiv mainDivs">
+              <p class="mainDivHeadings">Skills</p>
+              <ul id="skillsList">
+                       ${skills.map((skillItem) => `<li>${skillItem}</li>`)}
+              </ul>
+          </div>
+          <div class="languageDiv">
+              <p class="mainDivHeadings mainDivs">Languages</p>
+              <ul id="languageList">
+                     ${languages.map(
+                       (languageItem) => `<li>${languageItem}</li>`
+                     )}
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<div class="lowerBtnsDiv">
+<button class="lowerBtns" onclick="editResume()">Edit Resume</button>
+<button class="lowerBtns" onclick="downloadPdf()">Download pdf</button>
+<button class="lowerBtns"><a href="${generatedLink}" target="_blank">Share link</a></button>
+</div>
+`;
+};
 
 const createResume = (event) => {
   event.preventDefault();
@@ -142,139 +223,139 @@ const createResume = (event) => {
     localStorage.setItem("resume", JSON.stringify(resume));
 
     let generatedLink = `https://dynamic-resume-generator-fg4kq6y7p-ghulamqadir1s-projects.vercel.app/${userName.value}`;
-    resumeDiv.innerHTML = `<div id="myResumeDiv">
-        <div class="headerDiv">
-            <div class="leftHandHeader">
-                <div>
-                    <p class="name">${userName.value}</p>
-                    <p class="jobTitle">${jobTitle.value}</p>
-                </div>
-                <img class="profileImg" src="${selectedFile}" />
-            </div>
-            <div class="rightHandHeader">
-                <p class="email">Email: ${email.value}</p>
-                <p class="phoneNo">Phone No: ${phoneNum.value}</p>
-            </div>
-        </div>
-
-           <div class="mainContentDiv">
-            <div class="leftHandMainDiv">
-                <div class="aboutMeDiv mainDivs">
-                    <p class="mainDivHeadings">About Me</p>
-                    <p class="aboutMeContent">${profileBio.value}</p>
-                </div>
-                <div class="educationDiv mainDivs">
-                    <p class="mainDivHeadings">Education</p>
-                    <ul id="educationList">
-            ${educationArray.map(
-              (educationItem) => `<li>${educationItem}</li>`
-            )}
-                    </ul>
-                </div>
-                <div class="experienceDiv mainDivs">
-                    <p class="mainDivHeadings">Experience</p>
-                  
-                    <ul id="experienceList">
-                            ${experienceArray.map(
-                              (expItem) => `<li>${expItem}</li>`
-                            )}
-                    </ul>
-                </div>
-            </div>
-
-            <div class="rightHandMainDiv">
-                <div class="experienceDiv mainDivs">
-                    <p class="mainDivHeadings">Skills</p>
-                    <ul id="skillsList">
-                             ${skillsArray.map(
-                               (skillItem) => `<li>${skillItem}</li>`
-                             )}
-                    </ul>
-                </div>
-                <div class="languageDiv">
-                    <p class="mainDivHeadings mainDivs">Languages</p>
-                    <ul id="languageList">
-                           ${languageArray.map(
-                             (languageItem) => `<li>${languageItem}</li>`
-                           )}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="lowerBtns">
-    <button class="lowerBtns" onclick="editResume('${userName.value}','${
-      jobTitle.value
-    }','${email.value}','${
-      phoneNum.value
-    }','${profileBio}',${educationArray},${skillsArray},${experienceArray},${languageArray})">Edit Resume</button>
-    <button class="lowerBtns" onclick="downloadPdf()">Download pdf</button>
-    <button class="lowerBtns"><a href="${generatedLink}" target="_blank">Share link</a></button>
-    </div>
-    `;
+    htmlContent(generatedLink);
   }
 };
 
-const editResume = (
-  name: string,
-  jobTitle: string,
-  email: string,
-  phoneNum: string,
-  profileBio: string,
-  educationArray: string[],
-  skillsArray: string[],
-  experienceArray: string[],
-  languageArray: string[]
-) => {
-  resumeDiv.innerHTML = `           
-            <p id="createResumeHeading">Update Resume</p>
-            <form method="post" onsubmit="updateResume(event)">
-                <div class="inputDiv">
-                    <input value="${name}" id="name" type="name" placeholder="Your Name">
-                </div>
-                <div class="inputDiv">
-                    <input id="jobTitle" type="text" placeholder="Your job title">
-                </div>
-                <div class="inputDiv">
-                    <input id="email" type="email" placeholder="Your Email">
-                </div>
-                <div class="inputDiv">
-                    <input id="phoneNum" type="number" placeholder="Phone No">
-                </div>
-                <div class="inputDiv">
-                    <textarea id="profileBio" placeholder="Enter profile bio" maxlength="400"></textarea>
-                </div>
-                <div class="inputDiv">
-                    <input id="educationInput" type="text" placeholder="Add Education">
-                    <button class="addBtn" onclick="addEducation()">+</button>
-                    <ul id="educationList"></ul>
-                </div>
-                <div class="inputDiv">
-                    <input id="experienceInput" type="text" placeholder="Add Experience">
-                    <button class="addBtn" onclick="addExperience()">+</button>
-                    <ul id="experienceList"></ul>
-                </div>
-                <div class="inputDiv">
-                    <input id="skillsInput" type="text" placeholder="Add Skills">
-                    <button class="addBtn" onclick="addSkill()">+</button>
-                    <ul id="skillsList"></ul>
-                </div>
-                <div class="inputDiv">
-                    <input id="languageInput" type="text" placeholder="Add Language">
-                    <button class="addBtn" onclick="addLanguage()">+</button>
-                    <ul id="languageList">
-${languageArray.map((item) => `<li>${item}</li>`)}
-                    </ul>
-                </div>
-                <div class="inputDiv">
-                    <img id="fileImg" src="" alt="">
-                    <input type="file" id="fileInput" onchange="uploadProfilePic()" />
-                </div>
-                <button>Update Resume</button>
-                `;
+let editResumeDiv = document.getElementById(
+  "editResumeDiv"
+) as HTMLInputElement;
+let editUserName = document.getElementById("editNameField") as HTMLInputElement;
+let editEmail = document.getElementById("editEmailField") as HTMLInputElement;
+let editJobTitle = document.getElementById(
+  "editJobTitleField"
+) as HTMLInputElement;
+let editProfileBio = document.getElementById(
+  "editProfileBioField"
+) as HTMLInputElement;
+let editPhoneNum = document.getElementById(
+  "editPhoneNumField"
+) as HTMLInputElement;
+let editSkill = document.getElementById(
+  "editSkillsInputField"
+) as HTMLInputElement;
+let editEducation = document.getElementById(
+  "editEducationInputField"
+) as HTMLInputElement;
+let editExperience = document.getElementById(
+  "editExperienceInputField"
+) as HTMLInputElement;
+let editLanguage = document.getElementById("languageInput") as HTMLInputElement;
+let editEducationList = document.getElementById(
+  "editEducationList"
+) as HTMLUListElement;
+let editSkillsList = document.getElementById(
+  "editSkillsList"
+) as HTMLUListElement;
+let editExperienceList = document.getElementById(
+  "editExperienceList"
+) as HTMLUListElement;
+let editLanguageList = document.getElementById(
+  "editLanguageList"
+) as HTMLUListElement;
+
+const addeditEducation = (event) => {
+  event.preventDefault();
+  if (editEducation.value.trim().length < 1) {
+    editEducation.focus();
+  } else {
+    educationArray.unshift(editEducation.value);
+    editEducationList.innerHTML += `<li>${editEducation.value}</li>`;
+    editEducation.value = "";
+  }
+};
+const addeditSkill = (event) => {
+  event.preventDefault();
+  if (editSkill.value.trim().length < 1) {
+    editSkill.focus();
+  } else {
+    skillsArray.unshift(editSkill.value);
+    editSkillsList.innerHTML += `<li>${editSkill.value}</li>`;
+    editSkill.value = "";
+  }
+};
+const addeditExperience = (event) => {
+  event.preventDefault();
+  if (editExperience.value.trim().length < 1) {
+    editExperience.focus();
+  } else {
+    experienceArray.unshift(editExperience.value);
+    editExperienceList.innerHTML += `<li>${editExperience.value}</li>`;
+    editExperience.value = "";
+  }
+};
+const addeditLanguage = (event) => {
+  event.preventDefault();
+  if (editLanguage.value.trim().length < 1) {
+    editLanguage.focus();
+  } else {
+    languageArray.unshift(editLanguage.value);
+    editLanguageList.innerHTML += `<li>${editLanguage.value}</li>`;
+    editLanguage.value = "";
+  }
+};
+const editResume = () => {
+  let getData = localStorage.getItem("resume");
+  let parsedData = getData ? JSON.parse(getData) : null;
+  let {
+    name,
+    email,
+    phoneNum,
+    jobTitle,
+    profileBio,
+    languages,
+    experience,
+    education,
+    skills,
+  } = parsedData;
+  console.log(languageArray);
+  resumeDiv.innerHTML = "";
+  editResumeDiv.style.display = "block";
+  editUserName.value = name;
+  editEmail.value = email;
+  editPhoneNum.value = phoneNum;
+  editJobTitle.value = jobTitle;
+  editProfileBio.value = profileBio;
+  editEducationList.innerHTML = `${education.map(
+    (item:string) => `<li>${item}</li>`
+  )}`;
+  editExperienceList.innerHTML = `${experience.map(
+    (item:string) => `<li>${item}</li>`
+  )}`;
+  editSkillsList.innerHTML = `${skills.map((item:string) => `<li>${item}</li>`)}`;
+  editLanguageList.innerHTML = `${languages.map((item:string) => `<li>${item}</li>`)}`;
 };
 
+const updateResume = (event) => {
+  event.preventDefault();
+
+  let resume: Resume = {
+    name: editUserName.value,
+    email: editEmail.value,
+    phoneNum: parseInt(editPhoneNum.value),
+    jobTitle: editJobTitle.value,
+    profileBio: editProfileBio.value,
+    skills: skillsArray,
+    education: educationArray,
+    experience: experienceArray,
+    languages: languageArray,
+    profileImg: selectedFile,
+  };
+  localStorage.setItem("resume", JSON.stringify(resume));
+  editResumeDiv.style.display = "none";
+  let generatedLink = `https://dynamic-resume-generator-fg4kq6y7p-ghulamqadir1s-projects.vercel.app/${userName.value}`;
+  htmlContent(generatedLink);
+};
 const uploadProfilePic = () => {
   let fileInput = document.getElementById("fileInput") as HTMLInputElement;
   const fileImg = document.getElementById("fileImg") as HTMLImageElement;

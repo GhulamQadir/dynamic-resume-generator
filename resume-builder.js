@@ -26,7 +26,8 @@ var closeErrorAlert = function () {
         alertDiv.style.display = "none";
     }, 600);
 };
-var addEducation = function () {
+var addEducation = function (event) {
+    event.preventDefault();
     if (education.value.trim().length < 1) {
         education.focus();
     }
@@ -36,7 +37,8 @@ var addEducation = function () {
         education.value = "";
     }
 };
-var addSkill = function () {
+var addSkill = function (event) {
+    event.preventDefault();
     if (skill.value.trim().length < 1) {
         skill.focus();
     }
@@ -46,7 +48,8 @@ var addSkill = function () {
         skill.value = "";
     }
 };
-var addExperience = function () {
+var addExperience = function (event) {
+    event.preventDefault();
     if (experience.value.trim().length < 1) {
         experience.focus();
     }
@@ -56,7 +59,8 @@ var addExperience = function () {
         experience.value = "";
     }
 };
-var addLanguage = function () {
+var addLanguage = function (event) {
+    event.preventDefault();
     if (language.value.trim().length < 1) {
         language.focus();
     }
@@ -65,6 +69,12 @@ var addLanguage = function () {
         languageList.innerHTML += "<li>".concat(language.value, "</li>");
         language.value = "";
     }
+};
+var htmlContent = function (generatedLink) {
+    var getData = localStorage.getItem("resume");
+    var parsedData = getData ? JSON.parse(getData) : null;
+    var name = parsedData.name, email = parsedData.email, phoneNum = parsedData.phoneNum, jobTitle = parsedData.jobTitle, profileBio = parsedData.profileBio, languages = parsedData.languages, experience = parsedData.experience, education = parsedData.education, skills = parsedData.skills;
+    resumeDiv.innerHTML = "<div id=\"myResumeDiv\">\n  <div class=\"headerDiv\">\n      <div class=\"leftHandHeader\">\n          <div>\n              <p class=\"name\">".concat(name, "</p>\n              <p class=\"jobTitle\">").concat(jobTitle, "</p>\n          </div>\n          <img class=\"profileImg\" src=\"").concat(selectedFile, "\" />\n      </div>\n      <div class=\"rightHandHeader\">\n          <p class=\"email\">Email: ").concat(email, "</p>\n          <p class=\"phoneNo\">Phone No: ").concat(phoneNum, "</p>\n      </div>\n  </div>\n\n     <div class=\"mainContentDiv\">\n      <div class=\"leftHandMainDiv\">\n          <div class=\"aboutMeDiv mainDivs\">\n              <p class=\"mainDivHeadings\">About Me</p>\n              <p class=\"aboutMeContent\">").concat(profileBio, "</p>\n          </div>\n          <div class=\"educationDiv mainDivs\">\n              <p class=\"mainDivHeadings\">Education</p>\n              <ul id=\"educationList\">\n      ").concat(education.map(function (educationItem) { return "<li>".concat(educationItem, "</li>"); }), "\n              </ul>\n          </div>\n          <div class=\"experienceDiv mainDivs\">\n              <p class=\"mainDivHeadings\">Experience</p>\n            \n              <ul id=\"experienceList\">\n                      ").concat(experience.map(function (expItem) { return "<li>".concat(expItem, "</li>"); }), "\n              </ul>\n          </div>\n      </div>\n\n      <div class=\"rightHandMainDiv\">\n          <div class=\"experienceDiv mainDivs\">\n              <p class=\"mainDivHeadings\">Skills</p>\n              <ul id=\"skillsList\">\n                       ").concat(skills.map(function (skillItem) { return "<li>".concat(skillItem, "</li>"); }), "\n              </ul>\n          </div>\n          <div class=\"languageDiv\">\n              <p class=\"mainDivHeadings mainDivs\">Languages</p>\n              <ul id=\"languageList\">\n                     ").concat(languages.map(function (languageItem) { return "<li>".concat(languageItem, "</li>"); }), "\n              </ul>\n          </div>\n      </div>\n  </div>\n</div>\n</div>\n<div class=\"lowerBtnsDiv\">\n<button class=\"lowerBtns\" onclick=\"editResume()\">Edit Resume</button>\n<button class=\"lowerBtns\" onclick=\"downloadPdf()\">Download pdf</button>\n<button class=\"lowerBtns\"><a href=\"").concat(generatedLink, "\" target=\"_blank\">Share link</a></button>\n</div>\n");
 };
 var createResume = function (event) {
     event.preventDefault();
@@ -133,11 +143,102 @@ var createResume = function (event) {
         };
         localStorage.setItem("resume", JSON.stringify(resume));
         var generatedLink = "https://dynamic-resume-generator-fg4kq6y7p-ghulamqadir1s-projects.vercel.app/".concat(userName.value);
-        resumeDiv.innerHTML = "<div id=\"myResumeDiv\">\n        <div class=\"headerDiv\">\n            <div class=\"leftHandHeader\">\n                <div>\n                    <p class=\"name\">".concat(userName.value, "</p>\n                    <p class=\"jobTitle\">").concat(jobTitle.value, "</p>\n                </div>\n                <img class=\"profileImg\" src=\"").concat(selectedFile, "\" />\n            </div>\n            <div class=\"rightHandHeader\">\n                <p class=\"email\">Email: ").concat(email.value, "</p>\n                <p class=\"phoneNo\">Phone No: ").concat(phoneNum.value, "</p>\n            </div>\n        </div>\n\n           <div class=\"mainContentDiv\">\n            <div class=\"leftHandMainDiv\">\n                <div class=\"aboutMeDiv mainDivs\">\n                    <p class=\"mainDivHeadings\">About Me</p>\n                    <p class=\"aboutMeContent\">").concat(profileBio.value, "</p>\n                </div>\n                <div class=\"educationDiv mainDivs\">\n                    <p class=\"mainDivHeadings\">Education</p>\n                    <ul id=\"educationList\">\n            ").concat(educationArray.map(function (educationItem) { return "<li>".concat(educationItem, "</li>"); }), "\n                    </ul>\n                </div>\n                <div class=\"experienceDiv mainDivs\">\n                    <p class=\"mainDivHeadings\">Experience</p>\n                  \n                    <ul id=\"experienceList\">\n                            ").concat(experienceArray.map(function (expItem) { return "<li>".concat(expItem, "</li>"); }), "\n                    </ul>\n                </div>\n            </div>\n\n            <div class=\"rightHandMainDiv\">\n                <div class=\"experienceDiv mainDivs\">\n                    <p class=\"mainDivHeadings\">Skills</p>\n                    <ul id=\"skillsList\">\n                             ").concat(skillsArray.map(function (skillItem) { return "<li>".concat(skillItem, "</li>"); }), "\n                    </ul>\n                </div>\n                <div class=\"languageDiv\">\n                    <p class=\"mainDivHeadings mainDivs\">Languages</p>\n                    <ul id=\"languageList\">\n                           ").concat(languageArray.map(function (languageItem) { return "<li>".concat(languageItem, "</li>"); }), "\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n    </div>\n    <div class=\"lowerBtns\">\n    <button class=\"lowerBtns\" onclick=\"editResume('").concat(userName.value, "','").concat(jobTitle.value, "','").concat(email.value, "','").concat(phoneNum.value, "','").concat(profileBio, "',").concat(educationArray, ",").concat(skillsArray, ",").concat(experienceArray, ",").concat(languageArray, ")\">Edit Resume</button>\n    <button class=\"lowerBtns\" onclick=\"downloadPdf()\">Download pdf</button>\n    <button class=\"lowerBtns\"><a href=\"").concat(generatedLink, "\" target=\"_blank\">Share link</a></button>\n    </div>\n    ");
+        htmlContent(generatedLink);
     }
 };
-var editResume = function (name, jobTitle, email, phoneNum, profileBio, educationArray, skillsArray, experienceArray, languageArray) {
-    resumeDiv.innerHTML = "           \n            <p id=\"createResumeHeading\">Update Resume</p>\n            <form method=\"post\" onsubmit=\"updateResume(event)\">\n                <div class=\"inputDiv\">\n                    <input value=\"".concat(name, "\" id=\"name\" type=\"name\" placeholder=\"Your Name\">\n                </div>\n                <div class=\"inputDiv\">\n                    <input id=\"jobTitle\" type=\"text\" placeholder=\"Your job title\">\n                </div>\n                <div class=\"inputDiv\">\n                    <input id=\"email\" type=\"email\" placeholder=\"Your Email\">\n                </div>\n                <div class=\"inputDiv\">\n                    <input id=\"phoneNum\" type=\"number\" placeholder=\"Phone No\">\n                </div>\n                <div class=\"inputDiv\">\n                    <textarea id=\"profileBio\" placeholder=\"Enter profile bio\" maxlength=\"400\"></textarea>\n                </div>\n                <div class=\"inputDiv\">\n                    <input id=\"educationInput\" type=\"text\" placeholder=\"Add Education\">\n                    <button class=\"addBtn\" onclick=\"addEducation()\">+</button>\n                    <ul id=\"educationList\"></ul>\n                </div>\n                <div class=\"inputDiv\">\n                    <input id=\"experienceInput\" type=\"text\" placeholder=\"Add Experience\">\n                    <button class=\"addBtn\" onclick=\"addExperience()\">+</button>\n                    <ul id=\"experienceList\"></ul>\n                </div>\n                <div class=\"inputDiv\">\n                    <input id=\"skillsInput\" type=\"text\" placeholder=\"Add Skills\">\n                    <button class=\"addBtn\" onclick=\"addSkill()\">+</button>\n                    <ul id=\"skillsList\"></ul>\n                </div>\n                <div class=\"inputDiv\">\n                    <input id=\"languageInput\" type=\"text\" placeholder=\"Add Language\">\n                    <button class=\"addBtn\" onclick=\"addLanguage()\">+</button>\n                    <ul id=\"languageList\">\n").concat(languageArray.map(function (item) { return "<li>".concat(item, "</li>"); }), "\n                    </ul>\n                </div>\n                <div class=\"inputDiv\">\n                    <img id=\"fileImg\" src=\"\" alt=\"\">\n                    <input type=\"file\" id=\"fileInput\" onchange=\"uploadProfilePic()\" />\n                </div>\n                <button>Update Resume</button>\n                ");
+var editResumeDiv = document.getElementById("editResumeDiv");
+var editUserName = document.getElementById("editNameField");
+var editEmail = document.getElementById("editEmailField");
+var editJobTitle = document.getElementById("editJobTitleField");
+var editProfileBio = document.getElementById("editProfileBioField");
+var editPhoneNum = document.getElementById("editPhoneNumField");
+var editSkill = document.getElementById("editSkillsInputField");
+var editEducation = document.getElementById("editEducationInputField");
+var editExperience = document.getElementById("editExperienceInputField");
+var editLanguage = document.getElementById("languageInput");
+var editEducationList = document.getElementById("editEducationList");
+var editSkillsList = document.getElementById("editSkillsList");
+var editExperienceList = document.getElementById("editExperienceList");
+var editLanguageList = document.getElementById("editLanguageList");
+var addeditEducation = function (event) {
+    event.preventDefault();
+    if (editEducation.value.trim().length < 1) {
+        editEducation.focus();
+    }
+    else {
+        educationArray.unshift(editEducation.value);
+        editEducationList.innerHTML += "<li>".concat(editEducation.value, "</li>");
+        editEducation.value = "";
+    }
+};
+var addeditSkill = function (event) {
+    event.preventDefault();
+    if (editSkill.value.trim().length < 1) {
+        editSkill.focus();
+    }
+    else {
+        skillsArray.unshift(editSkill.value);
+        editSkillsList.innerHTML += "<li>".concat(editSkill.value, "</li>");
+        editSkill.value = "";
+    }
+};
+var addeditExperience = function (event) {
+    event.preventDefault();
+    if (editExperience.value.trim().length < 1) {
+        editExperience.focus();
+    }
+    else {
+        experienceArray.unshift(editExperience.value);
+        editExperienceList.innerHTML += "<li>".concat(editExperience.value, "</li>");
+        editExperience.value = "";
+    }
+};
+var addeditLanguage = function (event) {
+    event.preventDefault();
+    if (editLanguage.value.trim().length < 1) {
+        editLanguage.focus();
+    }
+    else {
+        languageArray.unshift(editLanguage.value);
+        editLanguageList.innerHTML += "<li>".concat(editLanguage.value, "</li>");
+        editLanguage.value = "";
+    }
+};
+var editResume = function () {
+    var getData = localStorage.getItem("resume");
+    var parsedData = getData ? JSON.parse(getData) : null;
+    var name = parsedData.name, email = parsedData.email, phoneNum = parsedData.phoneNum, jobTitle = parsedData.jobTitle, profileBio = parsedData.profileBio, languages = parsedData.languages, experience = parsedData.experience, education = parsedData.education, skills = parsedData.skills;
+    console.log(languageArray);
+    resumeDiv.innerHTML = "";
+    editResumeDiv.style.display = "block";
+    editUserName.value = name;
+    editEmail.value = email;
+    editPhoneNum.value = phoneNum;
+    editJobTitle.value = jobTitle;
+    editProfileBio.value = profileBio;
+    editEducationList.innerHTML = "".concat(education.map(function (item) { return "<li>".concat(item, "</li>"); }));
+    editExperienceList.innerHTML = "".concat(experience.map(function (item) { return "<li>".concat(item, "</li>"); }));
+    editSkillsList.innerHTML = "".concat(skills.map(function (item) { return "<li>".concat(item, "</li>"); }));
+    editLanguageList.innerHTML = "".concat(languages.map(function (item) { return "<li>".concat(item, "</li>"); }));
+};
+var updateResume = function (event) {
+    event.preventDefault();
+    var resume = {
+        name: editUserName.value,
+        email: editEmail.value,
+        phoneNum: parseInt(editPhoneNum.value),
+        jobTitle: editJobTitle.value,
+        profileBio: editProfileBio.value,
+        skills: skillsArray,
+        education: educationArray,
+        experience: experienceArray,
+        languages: languageArray,
+        profileImg: selectedFile,
+    };
+    localStorage.setItem("resume", JSON.stringify(resume));
+    editResumeDiv.style.display = "none";
+    var generatedLink = "https://dynamic-resume-generator-fg4kq6y7p-ghulamqadir1s-projects.vercel.app/".concat(userName.value);
+    htmlContent(generatedLink);
 };
 var uploadProfilePic = function () {
     var fileInput = document.getElementById("fileInput");
