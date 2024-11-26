@@ -101,7 +101,7 @@ const htmlContent = (generatedLink) => {
     experience,
     education,
     skills,
-  } = parsedData;
+  }: Resume = parsedData;
   resumeDiv.innerHTML = `<div id="myResumeDiv">
   <div class="headerDiv">
       <div class="leftHandHeader">
@@ -318,7 +318,6 @@ const editResume = () => {
     education,
     skills,
   } = parsedData;
-  console.log(languageArray);
   resumeDiv.innerHTML = "";
   editResumeDiv.style.display = "block";
   editUserName.value = name;
@@ -327,13 +326,17 @@ const editResume = () => {
   editJobTitle.value = jobTitle;
   editProfileBio.value = profileBio;
   editEducationList.innerHTML = `${education.map(
-    (item:string) => `<li>${item}</li>`
+    (item: string) => `<li>${item}</li>`
   )}`;
   editExperienceList.innerHTML = `${experience.map(
-    (item:string) => `<li>${item}</li>`
+    (item: string) => `<li>${item}</li>`
   )}`;
-  editSkillsList.innerHTML = `${skills.map((item:string) => `<li>${item}</li>`)}`;
-  editLanguageList.innerHTML = `${languages.map((item:string) => `<li>${item}</li>`)}`;
+  editSkillsList.innerHTML = `${skills.map(
+    (item: string) => `<li>${item}</li>`
+  )}`;
+  editLanguageList.innerHTML = `${languages.map(
+    (item: string) => `<li>${item}</li>`
+  )}`;
 };
 
 const updateResume = (event) => {
